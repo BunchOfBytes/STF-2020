@@ -1,2 +1,2 @@
 # STF-2020
-Govtech CTF
+Solutions for Govtech CTF
