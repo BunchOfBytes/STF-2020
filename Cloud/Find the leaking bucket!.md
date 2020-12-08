@@ -13,9 +13,13 @@ T1530 - https://attack.mitre.org/techniques/T1530/
 
 ## Tools used:
 OS - Kali Linux
+
 CeWL - wordlist generator (https://github.com/digininja/CeWL)
+
 Gobuster - URL Fuzzer (https://github.com/OJ/gobuster)
+
 Amazon EC2 Instance (Optional) - as a proxy (
+
 Proxychains (Optional) - to force Gobuster to pivot through the EC2 instance 
 
 ## Process
