@@ -28,4 +28,7 @@ From the website we see that there are words that are shown, from the challenge 
 ### Step 1: Building the Wordlist
 One tool we can use to extract the words is CeWL, CeWL is a tool that helps us generate wordlists from a website based on the words shown there
 
+``````
 cewl https://d1ynvzedp0o7ys.cloudfront.net/ > wordlist.txt
+``````
+This tool however does not work on pictures and it looks like we have to manually extract keywords from the Steve Jobs quote, to be safe I just extracted the entire Steve Jobs quote. The final wordlist can be found here - 
