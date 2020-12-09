@@ -31,4 +31,4 @@ One tool we can use to extract the words is CeWL, CeWL is a tool that helps us g
 ``````
 cewl https://d1ynvzedp0o7ys.cloudfront.net/ > wordlist.txt
 ``````
-This tool however does not work on pictures and it looks like we have to manually extract keywords from the Steve Jobs quote, to be safe I just extracted the entire Steve Jobs quote. I cleaned up the wordlist by removing capital letters as S3 buckets cannot consist of capital letters (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). The final wordlist can be found here - https://github.com/BunchOfBytes/STF-2020/edit/main/Cloud/wordlist.txt
+This tool however does not work on pictures and it looks like we have to manually extract keywords from the Steve Jobs quote, to be safe I just extracted the entire Steve Jobs quote. I cleaned up the wordlist by removing capital letters as S3 buckets cannot consist of capital letters (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html) as well as the CeWL header which generates everytime CeWL is loaded. The final wordlist can be found here - https://github.com/BunchOfBytes/STF-2020/edit/main/Cloud/wordlist.txt
