@@ -3,11 +3,13 @@ As a user and member of Korovax mobile, you will be treated with a lot of inform
 
 ## Summary:
 This application contains hidden functionality in ViewActivity which can be accessed via a deep link. The hidden functionality has a client-side string validation which can be 
-easily bypassed via modification of Smali code
+easily bypassed via modification of Smali code.
 
 Relevant CWE:
 
-CWE-602: Client-Side Enforcement of Server-Side Security(https://cwe.mitre.org/data/definitions/602.html)
+CWE-603: Use of Client-Side Authentication (https://cwe.mitre.org/data/definitions/603.html)
+
+CWE-912: Hidden Functionality (https://cwe.mitre.org/data/definitions/912.html)
 
 ## Tools used:
 OS - Kali Linux
@@ -35,7 +37,7 @@ To install the APK app use the following (Take note of the path executed from!):
 ``````
 root@kali:/opt/genymobile/genymotion/tools# ./adb install /root/mobile-challenge.apk
 ``````
-I performed dynamic analysis on the app first. Testing the admin authentication functionality, I noticed that there are no requests being made on BurpSuite. This is a big red flag for us that the code is performing checks on the client side!
+I performed dynamic analysis on the app first. Testing the text editor activity, there are no web requests. That means that the text editor is not communicating with any server which is normal behaviour. Continuing on I did some static analysis,
 
 #### Static Analysis:
 We decompile the app on jadx-gui
@@ -44,78 +46,124 @@ jadx-gui
 ``````
 Select the downloaded apk.
 
-Since we are after the admin authentication functionality, we visit the sg.gov.tech.ctf.mobile/Admin/AdminAuthenticationActivity from the activity code, we see a function and 2 classes, OnCreate(), class a and class b. Since OnCreate() looks like it is creating the UI of the app and class a has little code being performed we zoom into class b. 
+Static analysis revealed that there is an activity called ViewActivity which is under the sg.gov.tech.ctf.mobile.User. Checking the AndroidManifest.xml,
 ``````
-        public Fragment getItem(int position) {
-            if (position == 0) {
-                return new f.a.a.a.a.a.a();
-            }
-            if (position != 1) {
-                return null;
-            }
-            return new f.a.a.a.a.e.c();
-        }
+        <activity android:name="sg.gov.tech.ctf.mobile.User.ViewActivity" android:exported="true" android:configChanges="keyboardHidden|orientation|screenSize">
+            <intent-filter android:label="flag_view">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="gov.tech.sg" android:host="ctf" android:pathPrefix="/howtogetthisflag"/>
+            </intent-filter>
+        </activity>
 ``````
-This means that the authentication code can be performed in either f.a.a.a.a.a.a() or f.a.a.a.a.e.c().
+We see that this activity can be activated via a deep link as it includes the BROWSABLE category. A deep link is a link which takes you to directly to a functionality within an app. In this case, we can craft the special deep link from the above manifest. The deep link can be crafted in the format <scheme>://<host>/<path>, from the above manifest, we see the data <data android:scheme="gov.tech.sg" android:host="ctf" android:pathPrefix="/howtogetthisflag"/>, this gives us the deeplink gov.tech.sg://ctf/howtogetthisflag which we can access to activate ViewActivity. We can do this via adb with sg.gov.tech.ctf.mobile as the package name of the application.
+        
+``````
+root@kali:/opt/genymobile/genymotion/tools# ./adb shell am start -W -a "android.intent.action.VIEW" -d "gov.tech.sg://ctf/howtogetthisflag" sg.gov.tech.ctf.mobile
+``````
 
-Examining f.a.a.a.a.a.a(),
+We should arrive on a SECRET VAULT page.
+
+#### Dynamic Analysis: 
+Back to dynamic analysis, I clicked on the "CLICK ME" button, we get a popup that says "Something's happening...", this can help us identify which part of the code is occuring when the button is clicked. BurpSuite did not log any web requests, which means that a client-side check must be happening.
+
+#### Static Analysis: 
+Back to static analysis I analysed the OnClick() function in ViewActivity
+
 ``````
- public void onClick(View v) {
-            if (a.this.f2851c.getText().toString().contains(c.a.a.a.a(-891818782648L))) {
-                a.b.k.c.a builder = new a.b.k.c.a(this.f2855b.getContext());
-                View view = LayoutInflater.from(this.f2855b.getContext()).inflate(R.layout.custom_alert, null);
+public void onClick(View v) {
+            if (ViewActivity.this.a() == 1720543) {
+                a.b.k.c.a builder = new a.b.k.c.a(ViewActivity.this);
+                View view = LayoutInflater.from(ViewActivity.this).inflate(R.layout.custom_alert, null);
                 TextView details = (TextView) view.findViewById(R.id.alert_detail);
-                ((TextView) view.findViewById(R.id.title)).setText(c.a.a.a.a(-1033552703416L));
-                details.setText(c.a.a.a.a(-1076502376376L));
-                builder.h(c.a.a.a.a(-1252596035512L), new C0061a());
-                builder.f(c.a.a.a.a(-1286955773880L), new C0062b());
+                ((TextView) view.findViewById(R.id.title)).setText("Congrats!");
+                details.setText(R.string.test);
+                f.a.a.a.a.e.b.a().d(Boolean.valueOf(true));
+                builder.h("Proceed", new C0075a());
+                builder.f("Close", new b());
                 builder.k(view);
                 builder.l();
                 return;
             }
-            try {
-                new Thread(new c(new Handler())).start();
-            } catch (Exception e2) {
-                Toast.makeText(this.f2855b.getContext(), c.a.a.a.a(-1312725577656L), 0).show();
-            }
+            Toast.makeText(ViewActivity.this, "Something's happening...", 0).show();
+            Toast.makeText(ViewActivity.this, "Maybe not.", 0).show();
         }
 ``````
-As seen above there is a if statement which is checking if a string containing something, presumably, this is the admin authentication check.
+The function, ViewActivity.this.a() is being executed and the resulted and it is being checked if it equals to 1720543.
 
-To access this file we need to find the full path to the function and class, we already know the full path as f/a/a/a/a/a/a, the class can be identified from the class which the authentication function is nested in, which is class b.
+Let's further examine ViewActivity.this.a(),
+
+``````
+public int a() {
+        int retVal = new Random().nextInt();
+        if (retVal < 0) {
+            return retVal * -1;
+        }
+        return retVal;
+    }
+``````
+It seems that a random integer is being generated and the next integer will be stored in the variable retval, if retVal is negative, it will be multiplied by -1 to become positive and retVal is returned.
+
+Since there is NO WAY we can modify the value of ViewActivity.this.a(), we have to modify the code in Smali to bypass the check
 
 ### Step 2: Modifying authentication functionality
 We can disassemble the APK using this apktool
 ``````
 apktool d -f -r mobile-challenge.apk
 ``````
-Go ahead and modify the target file using nano or your preferred file editor
+We can easily modify the if check just as we did for True or false?, but that would be no fun. Instead we could modify the function ViewActivity.this.a() such that it will always return 1720543.
+
+To do this we find the code
 ``````
-nano ./mobile-challenge/smali/f/a/a/a/a/a/'a$b.smali'
+nano ./mobile-challenge/smali/sg/gov/tech/ctf/mobile/User/'ViewActivity.smali'
 ``````
 
-The code block we need to modify can be found for search for 'if' in the Smali code
+The code block for the function we can modify is shown below
 ``````
-.line 75
-    .local v0, "password":Ljava/lang/String;
-    const-wide v1, -0xcfa48aafb8L
+# virtual methods
+.method public a()I
+    .locals 2
 
-    invoke-static {v1, v2}, Lc/a/a/a;->a(J)Ljava/lang/String;
+    .line 79
+    new-instance v0, Ljava/util/Random;
 
-    move-result-object v1
+    invoke-direct {v0}, Ljava/util/Random;-><init>()V
 
-    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+    .line 80
+    .local v0, "random":Ljava/util/Random;
+    invoke-virtual {v0}, Ljava/util/Random;->nextInt()I
 
     move-result v1
 
-    if-eqz v1, :cond_0
+    .line 81
+    .local v1, "retVal":I
+    if-gez v1, :cond_0
+
+    .line 82
+    mul-int/lit8 v1, v1, -0x1
+
+    .line 84
+    :cond_0
+    return v1
+.end method
 ``````
 
-The code we want to modify is if-eqz v1, :cond_0 and we want to make it such that the authentication passes if the checked string does not contain the string. So we can simply modify the line contained the if code to:
-``````
-if-nez v1, :cond_0
-``````
-### Step 3: Bypassing authentication,
+To make sure we always return the value of 1720543, we can introduce the code at the start of the function. We first need to initialise a register with the constant 1720543 and then return this value of this register. We can add these two instructions just below .line 79 shown below.
+`````
+...
+    .line 79
+    const v1, 1720543
+
+    return v1
+
+    new-instance v0, Ljava/util/Random;
+
+    invoke-direct {v0}, Ljava/util/Random;-><init>()V
+...
+`````` 
+
+### Step 3: Bypassing the check,
 Now we utilise apktool to rebuild the modified APK.
 ``````
 apktool b mobile-challenge -o modifiedAPK.apk
@@ -130,12 +178,19 @@ And reinstall the modified APK.
 root@kali:/opt/genymobile/genymotion/tools# ./adb uninstall sg.gov.tech.ctf.mobile
 root@kali:/opt/genymobile/genymotion/tools# ./adb install /root/modifiedAPK.apk
 ``````
-And now when we visit the admin login page even without a password, we can login!
 
-### Flag: govtech-csg{It5_N0T_Ez_2_L0G_1n_S_AdM1n}
+And now when we visit the hidden functionality again,
+``````
+root@kali:/opt/genymobile/genymotion/tools# ./adb shell am start -W -a "android.intent.action.VIEW" -d "gov.tech.sg://ctf/howtogetthisflag" sg.gov.tech.ctf.mobile
+``````
+
+Clicking the button gives us a Base64 encoded flag - Z292dGVjaC1jc2d7SV9oMFAzX3VfRDFEX04wVF9DbDFjS19VUl9XQHlfSDNyM30= 
+which can be decoded into the real flag.
+
+### Flag: govtech-csg{I_h0P3_u_D1D_N0T_Cl1cK_UR_W@y_H3r3}
 
 ## Mitigations
-Authentication should be performed on server-side. 
+Checks should be performed on server-side. All intentional functionality of the application should be documented. Constant checks on the code should be carried out such that there is no hidden functionality which is not documented.
 
 ### Writeup by: Haxatron
 
