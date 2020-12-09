@@ -29,6 +29,10 @@ See here if you want to figure out how to configure BurpSuite with genymotion (I
 ## Process:
 ### Step 1: Analysing authentication functionality
 #### Dynamic Analysis:
+To install the APK app use the following (Take note of the path executed from!):
+``````
+root@kali:/opt/genymobile/genymotion/tools# ./adb install /root/mobile-challenge.apk
+``````
 I performed dynamic analysis on the app first. Testing the app functionality, I noticed that there are no requests being made on BurpSuite. This is a big red flag for us that the code is performing checks on the client side!
 
 #### Static Analysis:
@@ -76,7 +80,44 @@ Examining f.a.a.a.a.a.a(),
 ``````
 As seen above there is a if statement which is checking if a string containing something, presumably, this is the admin authentication check.
 
+To access this file we need to find the full path to the function and class, we already know the full path as f/a/a/a/a/a/a, the class can be identified from the class which the authentication function is nested in, which is class b.
 
+### Step 2: Modifying authentication functionality
+We can disassemble the APK using this apktool
+``````
+apktool d -f -r mobile-challenge.apk
+``````
+Go ahead and modify the target file using nano or your preferred file editor
+``````
+nano ./mobile-challenge/smali/f/a/a/a/a/a/'a$b.smali'
+``````
+
+The code block we need to modify can be found for search for 'if' in the Smali code
+``````
+.line 75
+    .local v0, "password":Ljava/lang/String;
+    const-wide v1, -0xcfa48aafb8L
+
+    invoke-static {v1, v2}, Lc/a/a/a;->a(J)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+``````
+
+The code we want to modify is if-eqz v1, :cond_0 and we want to make it such that the authentication passes if the checked string does not contain the string. So we can simply modify the line contained the if code to:
+``````
+if-nez v1, :cond_0
+``````
+### Step 3:
+Now we utilise apktool to rebuild the modified APK.
+``````
+apktool b mobile-challenge -o modifiedAPK.apk
+``````
 ### Flag: govtech-csg{}
 
 
