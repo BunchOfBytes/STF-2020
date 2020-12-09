@@ -139,6 +139,7 @@ and aborting after we successfully found the key.
 
 We should receive this:
 ``````
+...
 Stage 2 completed. Starting zipdecrypt on Wed Dec  9 02:59:20 2020
 Decrypting flag.txt (1918da1aa13583f007af7db7)... OK!
 Decrypting STACK the Flags Consent and Indemnity Form.docx (336ab103cd78d1b9756efc91)... OK!
