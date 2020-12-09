@@ -64,6 +64,10 @@ python script.py > possible.txt
 ``````
 
 ### Step 2: Performing the bruteforce
-
+Now we can use Gobuster which can help us to perform a directory bruteforce attack using our wordlist that we built. Please note that this should be performed with the latest
+version of Gobuster (v3.0.1) as the syntax has changed a little over time
+``````
+gobuster dir -u http://s3-ap-southeast-1.amazonaws.com/ -w possible.txt
+``````
 
 ### Optional Step: What if I am blocked from scanning buckets on AWS?
