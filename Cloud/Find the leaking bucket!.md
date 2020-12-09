@@ -21,8 +21,6 @@ Gobuster v3.0.1- URL Fuzzer (https://github.com/OJ/gobuster)
 
 Amazon EC2 Instance (Optional) - as a proxy 
 
-Proxychains (Optional) - to force Gobuster to pivot through the EC2 instance (https://github.com/haad/proxychains)
-
 ## Process:
 From the website we see that there are words that are shown, from the challenge description we see that we have to use the common words related to the company's business.
 
@@ -70,7 +68,29 @@ version of Gobuster (v3.0.1) as the syntax has changed a little over time
 gobuster dir -u http://s3-ap-southeast-1.amazonaws.com/ -w possible.txt
 ``````
 You should receive the following output:
-
+``````
+===============================================================
+2020/12/09 02:09:25 Finished
+===============================================================
+root@kali:~/Downloads# gobuster dir -u http://s3-ap-southeast-1.amazonaws.com/ -p socks5://127.0.0.1:8080 -w possible.txt
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://s3-ap-southeast-1.amazonaws.com/
+[+] Threads:        10
+[+] Wordlist:       possible.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2020/12/09 02:11:17 Starting gobuster
+===============================================================
+/think-innovation-s4fet3ch (Status: 200)
+===============================================================
+2020/12/09 02:11:20 Finished
+===============================================================
+``````
 ### Optional Step: What if I am blocked from scanning buckets on AWS?
 Often times, especially when performing a pentest, we may try to mount bruteforce attacks and suddenly get banned from logging into the machine. If the ban is based on IP, instead of asking a client to reset a production machine which can cost our client money for the downtime, we can instead proxy our login requests through another machine we compromised.
 
@@ -81,9 +101,13 @@ Once we have received our public key and created an instance we first change our
 chmod 400 stf.pem
 ``````
 
-And we can perform a dynamic SSH portforwarding,
+And we can perform a dynamic SSH portforwarding, (replace the public key name and generated EC2 address with your own.)
 ``````
-ssh -i stf.pem -N -D 127.0.0.1:1080 ec2-user@52.221.195.216
+ssh -i stf.pem -N -D 127.0.0.1:8080 ec2-user@52.221.195.216
 ``````
+
+We can now utilise our machine as a proxy, luckily for us, Gobuster has an option for us to specify a proxy using -p
+
+
 
 ### Writeup by: Haxatron
