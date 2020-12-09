@@ -19,9 +19,9 @@ CeWL - wordlist generator (https://github.com/digininja/CeWL)
 
 Gobuster - URL Fuzzer (https://github.com/OJ/gobuster)
 
-Amazon EC2 Instance (Optional) - as a proxy (
+Amazon EC2 Instance (Optional) - as a proxy 
 
-Proxychains (Optional) - to force Gobuster to pivot through the EC2 instance 
+Proxychains (Optional) - to force Gobuster to pivot through the EC2 instance (https://github.com/haad/proxychains)
 
 ## Process:
 From the website we see that there are words that are shown, from the challenge description we see that we have to use the common words related to the company's business.
