@@ -105,7 +105,7 @@ Now we can visit https://s3-ap-southeast-1.amazonaws.com/think-innovation-s4fet3
 ### Step 3: Cracking the encrypted zip file
 We download the zip file
 ``````
-wget https://think-innovation-s4fet3ch.s3-ap-southeast-1.amazonaws.com/secret-files.zip
+wget https://s3-ap-southeast-1.amazonaws.com/think-innovation-s4fet3ch/secret-files.zip
 ``````
 
 Once we have downloaded the zip file, we can inspect the contents to see that the zip file has two files - the indemnity form from Govtech Stack the Flags and the flag.txt it also requires a password. Since we have an indemnity form, we can use utilise PKCrack as we already have the plaintext indemnity form which can be downloaded from online (https://ctf.tech.gov.sg/files/STACK%20the%20Flags%20Consent%20and%20Indemnity%20Form.docx)
