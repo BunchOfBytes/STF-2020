@@ -69,5 +69,21 @@ version of Gobuster (v3.0.1) as the syntax has changed a little over time
 ``````
 gobuster dir -u http://s3-ap-southeast-1.amazonaws.com/ -w possible.txt
 ``````
+You should receive the following output:
 
 ### Optional Step: What if I am blocked from scanning buckets on AWS?
+Often times, especially when performing a pentest, we may try to mount bruteforce attacks and suddenly get banned from logging into the machine. If the ban is based on IP, instead of asking a client to reset a production machine which can cost our client money for the downtime, we can instead proxy our login requests through another machine we compromised.
+
+Similarly, I created an Amazon EC2 Instance on the ap-southeast-1 region to proxy my requests through. You may read up how to do that here: (https://docs.aws.amazon.com/efs/latest/ug/gs-step-one-create-ec2-resources.html)
+
+Once we have received our public key and created an instance we first change our permissions for the public key file (Replace with your public key name)
+``````
+chmod 400 stf.pem
+``````
+
+And we can perform a dynamic SSH portforwarding,
+``````
+ssh -i stf.pem -N -D 127.0.0.1:1080 ec2-user@52.221.195.216
+``````
+
+### Writeup by: Haxatron
