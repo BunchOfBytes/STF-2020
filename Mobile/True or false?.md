@@ -43,7 +43,7 @@ jadx-gui
 ``````
 Select the downloaded apk.
 
-Since we are after the admin authentication functionality, we visit the AdminAuthenticationActivity from the activity code, we see a function and 2 classes, OnCreate(), class a and class b. Since OnCreate() looks like it is creating the UI of the app and class a has little code being performed we zoom into class b. 
+Since we are after the admin authentication functionality, we visit the sg.gov.tech.ctf.mobile/Admin/AdminAuthenticationActivity from the activity code, we see a function and 2 classes, OnCreate(), class a and class b. Since OnCreate() looks like it is creating the UI of the app and class a has little code being performed we zoom into class b. 
 ``````
         public Fragment getItem(int position) {
             if (position == 0) {
