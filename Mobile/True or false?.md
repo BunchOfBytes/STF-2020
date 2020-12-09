@@ -113,16 +113,26 @@ The code we want to modify is if-eqz v1, :cond_0 and we want to make it such tha
 ``````
 if-nez v1, :cond_0
 ``````
-### Step 3:
+### Step 3: Bypassing authentication,
 Now we utilise apktool to rebuild the modified APK.
 ``````
 apktool b mobile-challenge -o modifiedAPK.apk
 ``````
-### Flag: govtech-csg{}
+Now we need to sign our APK
+``````
+keytool -genkey -v -keystore my-release-key.keystore -keyalg RSA -keysize 2048 -validity 10000
+jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore my-release-key.keystore modifiedAPK.apk mykey
+``````
+And reinstall the modified APK.
+``````
+root@kali:/opt/genymobile/genymotion/tools# ./adb uninstall sg.gov.tech.ctf.mobile
+root@kali:/opt/genymobile/genymotion/tools# ./adb install /root/modifiedAPK.apk
+``````
+And now when we visit the admin login page even without a password, we can login!
 
+### Flag: govtech-csg{It5_N0T_Ez_2_L0G_1n_S_AdM1n}
 
 ## Mitigations
 Authentication should be performed on server-side. 
 
 ### Writeup by: Haxatron
-
