@@ -52,6 +52,30 @@ Since we are after the admin authentication functionality, we visit the AdminAut
 ``````
 This means that the authentication code can be performed in either f.a.a.a.a.a.a() or f.a.a.a.a.e.c().
 
+Examining f.a.a.a.a.a.a(),
+``````
+ public void onClick(View v) {
+            if (a.this.f2851c.getText().toString().contains(c.a.a.a.a(-891818782648L))) {
+                a.b.k.c.a builder = new a.b.k.c.a(this.f2855b.getContext());
+                View view = LayoutInflater.from(this.f2855b.getContext()).inflate(R.layout.custom_alert, null);
+                TextView details = (TextView) view.findViewById(R.id.alert_detail);
+                ((TextView) view.findViewById(R.id.title)).setText(c.a.a.a.a(-1033552703416L));
+                details.setText(c.a.a.a.a(-1076502376376L));
+                builder.h(c.a.a.a.a(-1252596035512L), new C0061a());
+                builder.f(c.a.a.a.a(-1286955773880L), new C0062b());
+                builder.k(view);
+                builder.l();
+                return;
+            }
+            try {
+                new Thread(new c(new Handler())).start();
+            } catch (Exception e2) {
+                Toast.makeText(this.f2855b.getContext(), c.a.a.a.a(-1312725577656L), 0).show();
+            }
+        }
+``````
+As seen above there is a if statement which is checking if a string containing something, presumably, this is the admin authentication check.
+
 
 ### Flag: govtech-csg{}
 
