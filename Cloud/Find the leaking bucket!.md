@@ -152,6 +152,7 @@ cat flag.txt
 
 ### Flag: govtech-csg{EnCrYpT!0n_D0e$_NoT_M3@n_Y0u_aR3_s4f3}
 
+
 ### Optional Step: What if I am blocked from scanning buckets on AWS?
 Often times, especially when performing a pentest, we may try to mount bruteforce attacks and suddenly get banned from logging into the machine. If the ban is based on IP, instead of asking a client to reset a production machine which can cost our client money for the downtime, we can instead proxy our login requests through another machine we compromised.
 
