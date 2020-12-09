@@ -9,6 +9,7 @@ This company had a misconfigured S3 bucket which was publically exposed to the i
 this misconfigured bucket. They then had to perform a known plaintext attack on an encrypted zip file to obtain the flag.
 
 Related MITRE ATT&CK techniques: 
+
 T1530 - https://attack.mitre.org/techniques/T1530/
 
 ## Tools used:
@@ -33,4 +34,27 @@ cewl https://d1ynvzedp0o7ys.cloudfront.net/ > wordlist.txt
 ``````
 This tool however does not work on pictures and it looks like we have to manually extract keywords from the Steve Jobs quote, to be safe I just extracted the entire Steve Jobs quote. I cleaned up the wordlist by removing capital letters as S3 buckets cannot consist of capital letters (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html) as well as the CeWL header which generates everytime CeWL is loaded. The final wordlist can be found here - https://github.com/BunchOfBytes/STF-2020/blob/main/Cloud/wordlist.txt.
 
+Now from this wordlist we can create a small Python script which helps us to generate all the possible S3 bucket names in the format “word1-word2-s4fet3ch”
+
+File: script.py (https://github.com/BunchOfBytes/STF-2020/blob/main/Cloud/script.py)
+``````
+##Create a list of words from wordlist
+wordlist=[]
+file = 'wordlist.txt'
+with open(file, 'r') as f:
+    for line in f:
+        line = line.rstrip("\n")    
+        wordlist.append(line)
+
+##Print the words to be outputted which will be redirected into a file later
+for i in wordlist:
+   str=""
+   str+=(i+"-")
+   print(str)
+   for j in wordlist:
+       str+=(j+"-")
+       str+="s4fet3ch"
+       print(str)
+       str=(i+"-")
+``````
 
