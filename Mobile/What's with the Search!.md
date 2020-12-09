@@ -120,8 +120,33 @@ To analyse this we can disassemble the APK using this apktool
 apktool d -f -r mobile-challenge.apk
 ``````
 
-We can use Ghidra to analyse the function, since we there is a native library in x86 instructions, we can easily import into Ghidra.
+We can use Ghidra to analyse the function, since we there is a native library in x86 instructions, we can easily import into Ghidra. The file can be found in
+./mobile-challenge/lib/x86/libnative-lib.so
 
+When we analyse Ghidra we can search functions in the Symbol Tree. Go under Java_sg_gov_tech_ctf_mobile > Java_sg_gov_tech_ctf_mobile_Admin_AdminHome_getPasswordHash
+
+void Java_sg_gov_tech_ctf_mobile_Admin_AdminHome_getPasswordHash(int *param_1)
+``````
+{
+  int in_GS_OFFSET;
+  undefined local_41 [41];
+  int local_18;
+  
+  local_18 = *(int *)(in_GS_OFFSET + 0x14);
+  FUN_00019c00(local_41,0x29,&DAT_00042029,"b7c1020edc5d4ab5ce059909f0a7bd73b3de005b");
+  (**(code **)(*param_1 + 0x29c))(param_1,local_41);
+  if (*(int *)(in_GS_OFFSET + 0x14) == local_18) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  __stack_chk_fail();
+}
+``````
+Oh look! There is a hash stored in there. We can search this hash online!
+We will get the URL https://sha1.gromweb.com/?hash=b7c1020edc5d4ab5ce059909f0a7bd73b3de005b,
+Click the link and we it says that this hash decrypts to qqww1122.
+
+When we key in qqww1122 into the search function into our android emulator, we get a popup saying that we should add govtech-csg{} to the password! 
 
 ### Flag: govtech-csg{qqww1122}
 
