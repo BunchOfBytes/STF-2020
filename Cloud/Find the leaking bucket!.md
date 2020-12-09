@@ -58,3 +58,12 @@ for i in wordlist:
        str=(i+"-")
 ``````
 
+Now we just redirect it to a new txt file
+``````
+python script.py > possible.txt
+``````
+
+### Step 2: Performing the bruteforce
+
+
+### Optional Step: What if I am blocked from scanning buckets on AWS?
