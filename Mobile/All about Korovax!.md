@@ -65,7 +65,8 @@ root@kali:/opt/genymobile/genymotion/tools# ./adb shell am start -W -a "android.
 
 We should arrive on a SECRET VAULT page.
 
-![ViewActivity](
+![ViewActivity](https://github.com/BunchOfBytes/STF-2020/blob/main/Screenshot%20(6).png)
+
 #### Dynamic Analysis: 
 Back to dynamic analysis, I clicked on the "CLICK ME" button, we get a popup that says "Something's happening...", this can help us identify which part of the code is occuring when the button is clicked. BurpSuite did not log any web requests, which means that a client-side check must be happening.
 
