@@ -177,6 +177,6 @@ We can also use our browser to view the XML listing of files in the S3 bucket us
 
 ## Mitigations
 S3 Buckets containing sensitive information, even if encrypted, should be configured to not be publically accessible without appropriate permissions.
-To configure the bucket, see here: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access.html
+To configure the bucket, see here: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access.html. Further possible mitigations can be found here: https://attack.mitre.org/techniques/T1530/ 
 
 ### Writeup by: Haxatron
