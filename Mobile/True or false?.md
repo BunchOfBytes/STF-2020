@@ -5,6 +5,7 @@ True or false, we can log in as admin easily.
 This application contains client-side checks in order for a user to access admin functionality. Players can easily bypass this authentication checks via modifying the Smali code contained in the APK file.
 
 Relevant CWE:
+
 CWE-603: Use of Client-Side Authentication (https://cwe.mitre.org/data/definitions/603.html)
 
 ## Tools used:
