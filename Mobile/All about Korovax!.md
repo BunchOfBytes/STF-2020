@@ -65,6 +65,7 @@ root@kali:/opt/genymobile/genymotion/tools# ./adb shell am start -W -a "android.
 
 We should arrive on a SECRET VAULT page.
 
+![ViewActivity](
 #### Dynamic Analysis: 
 Back to dynamic analysis, I clicked on the "CLICK ME" button, we get a popup that says "Something's happening...", this can help us identify which part of the code is occuring when the button is clicked. BurpSuite did not log any web requests, which means that a client-side check must be happening.
 
@@ -105,7 +106,7 @@ public int a() {
 ``````
 It seems that a random integer is being generated and the next integer will be stored in the variable retval, if retVal is negative, it will be multiplied by -1 to become positive and retVal is returned.
 
-Since there is NO WAY we can modify the value of ViewActivity.this.a(), we have to modify the code in Smali to bypass the check
+Since a random number is generated, it is difficult to obtain the exact value of 1720543. Hence, we have to modify the code in Smali to bypass the check
 
 ### Step 2: Modifying authentication functionality
 We can disassemble the APK using this apktool
