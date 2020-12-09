@@ -174,7 +174,7 @@ gobuster dir -u http://s3-ap-southeast-1.amazonaws.com/ -p socks5://127.0.0.1:80
 We can also use our browser to view the XML listing of files in the S3 bucket using the FoxyProxy browser plugin (See here: https://null-byte.wonderhowto.com/how-to/use-burp-foxyproxy-easily-switch-between-proxy-settings-0196630/) Configure it to use the proxy IP 127.0.0.1, port 8080 and proxy type SOCKS5. We should be able see the XML listing and hence download the secret-files.zip. 
 
 ## Mitigations
-S3 Buckets containing sensitive information, even if encrypted, should be configured to not be publically accessible without appropriate permissions
+S3 Buckets containing sensitive information, even if encrypted, should be configured to not be publically accessible without appropriate permissions.
 To configure the bucket, see here: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/block-public-access.html
 
 ### Writeup by: Haxatron
