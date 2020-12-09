@@ -20,7 +20,7 @@ genymotion - Android emulator
 
 adb - install apk on our android app.
 
-burpsuite - to test for any web requests
+BurpSuite - to test for any web requests
 
 ## Setup:
 Install genymotion (https://docs.genymotion.com/desktop/3.0/01_Get_started/012_Installation.html). Be sure to install an SDK of 21 or higher as the minSdkVersion specified in AndroidManifest.xml is 21.
@@ -33,7 +33,7 @@ To install the APK app use the following (Take note of the path executed from!):
 ``````
 root@kali:/opt/genymobile/genymotion/tools# ./adb install /root/mobile-challenge.apk
 ``````
-I performed dynamic analysis on the app first. Testing the app functionality, I noticed that there are no requests being made on BurpSuite. This is a big red flag for us that the code is performing checks on the client side!
+I performed dynamic analysis on the app first. Testing the admin authentication functionality, I noticed that there are no requests being made on BurpSuite. This is a big red flag for us that the code is performing checks on the client side!
 
 #### Static Analysis:
 We decompile the app on jadx-gui
