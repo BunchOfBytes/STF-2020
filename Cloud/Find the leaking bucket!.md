@@ -98,7 +98,7 @@ you would like to bypass this (see below!)
 
 Now we can visit https://s3-ap-southeast-1.amazonaws.com/think-innovation-s4fet3ch to view the XML listing of the bucket.
 
-![XML Listing]()
+![XML Listing](https://github.com/BunchOfBytes/STF-2020/blob/main/Screenshot%20(2).png)
 ### Optional Step: What if I am blocked from scanning buckets on AWS?
 Often times, especially when performing a pentest, we may try to mount bruteforce attacks and suddenly get banned from logging into the machine. If the ban is based on IP, instead of asking a client to reset a production machine which can cost our client money for the downtime, we can instead proxy our login requests through another machine we compromised.
 
