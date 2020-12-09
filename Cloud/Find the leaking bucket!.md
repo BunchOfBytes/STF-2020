@@ -21,6 +21,8 @@ Gobuster v3.0.1- URL Fuzzer (https://github.com/OJ/gobuster)
 
 Amazon EC2 Instance (Optional) - as a proxy 
 
+FoxyProxy browser plugin - browser plugin for proxying (https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
+
 ## Process:
 From the website we see that there are words that are shown, from the challenge description we see that we have to use the common words related to the company's business.
 
@@ -72,7 +74,7 @@ You should receive the following output:
 ===============================================================
 2020/12/09 02:09:25 Finished
 ===============================================================
-root@kali:~/Downloads# gobuster dir -u http://s3-ap-southeast-1.amazonaws.com/ -p socks5://127.0.0.1:8080 -w possible.txt
+root@kali:~/Downloads# gobuster dir -u http://s3-ap-southeast-1.amazonaws.com/ -w possible.txt
 ===============================================================
 Gobuster v3.0.1
 by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
@@ -91,6 +93,11 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 2020/12/09 02:11:20 Finished
 ===============================================================
 ``````
+If you do not receive the above, that means AWS has perhaps shadowbanned you from viewing bucket listings, I have included an optional step for you to take a look in case
+you would like to bypass this (see below!)
+
+Now we can visit https://s3-ap-southeast-1.amazonaws.com/think-innovation-s4fet3ch to view the XML listing of the bucket.
+
 ### Optional Step: What if I am blocked from scanning buckets on AWS?
 Often times, especially when performing a pentest, we may try to mount bruteforce attacks and suddenly get banned from logging into the machine. If the ban is based on IP, instead of asking a client to reset a production machine which can cost our client money for the downtime, we can instead proxy our login requests through another machine we compromised.
 
@@ -107,7 +114,8 @@ ssh -i stf.pem -N -D 127.0.0.1:8080 ec2-user@52.221.195.216
 ``````
 
 We can now utilise our machine as a proxy, luckily for us, Gobuster has an option for us to specify a proxy using -p
-
-
-
+``````
+gobuster dir -u http://s3-ap-southeast-1.amazonaws.com/ -p socks5://127.0.0.1:8080 -w possible.txt
+``````
+We can also use our browser to view the XML listing of files in the S3 bucket using the FoxyProxy browser plugin (See here: https://null-byte.wonderhowto.com/how-to/use-burp-foxyproxy-easily-switch-between-proxy-settings-0196630/) Configure it to use the proxy IP 127.0.0.1, port 8080 and proxy type SOCKS5. We should be able see the XML listing and hence download the secret-files.zip. 
 ### Writeup by: Haxatron
