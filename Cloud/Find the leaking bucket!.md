@@ -17,7 +17,7 @@ OS - Kali Linux
 
 CeWL - wordlist generator (https://github.com/digininja/CeWL)
 
-Gobuster - URL Fuzzer (https://github.com/OJ/gobuster)
+Gobuster v3.0.1- URL Fuzzer (https://github.com/OJ/gobuster)
 
 Amazon EC2 Instance (Optional) - as a proxy 
 
