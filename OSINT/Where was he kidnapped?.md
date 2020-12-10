@@ -5,7 +5,7 @@ The missing engineer stores his videos from his phone in his private cloud serve
 Players were given 3 video files, they had to trace the postal code of the location of where the videos had taken place.
 
 ## Process
-This challenge gives us 3 videos. Important information from the videos are first identified. For Video 1, we see Bus Service 117 along with an MRT in the background. With the caption “Finally”, it meant this was the bus service the engineer was waiting for. A quick search here showed that MRT’s at the possible locations of this video were at:
+This challenge gives us 3 videos. Important information from the videos are first identified. For Video 1, we see Bus Service 117 along with an MRT in the background. With the caption “Finally”, it meant this was the bus service the engineer was waiting for. A quick search here (https://www.transitlink.com.sg/eservice/eguide/service_route.php?service=117) showed that MRT’s at the possible locations of this video were at:
 
 1. Sembawang
 	
@@ -28,7 +28,7 @@ For Video 2, we don’t see much other than two yellow pillars and the caption �
 Video 3 shows the exact place where the kidnapping happened, which is a void deck area under a HDB block. It is shown in Video 2 that he walked in, meaning that the possible locations were within the area highlighted below. 
 ![OSINT-2-2](https://github.com/BunchOfBytes/STF-2020/blob/main/osint-32.png)
 
-From here, we just had to use street view further until we found the table and the community garden behind it.
+From here, we just had to use street view further until we found the table and the community garden behind it. (https://www.google.com/maps/@1.4132608,103.8379393,3a,20.8y,75.34h,87.39t/data=!3m7!1e1!3m5!1seW8RJNGwX2BgTjUi3tyBng!2e0!6s%2F%2Fgeo0.ggpht.com%2Fcbk%3Fpanoid%3DeW8RJNGwX2BgTjUi3tyBng%26output%3Dthumbnail%26cb_client%3Dmaps_sv.tactile.gps%26thumb%3D2%26w%3D203%26h%3D100%26yaw%3D177.6653%26pitch%3D0%26thumbfov%3D100!7i16384!8i8192)
 ![OSINT-2-3](https://github.com/BunchOfBytes/STF-2020/blob/main/osint-33.png)
 This area was identified as Block 870. Searching online gave us a postal code of 760870, and indeed govtech-csg{760870} was the flag.
 
