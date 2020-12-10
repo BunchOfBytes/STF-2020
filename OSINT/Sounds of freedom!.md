@@ -20,3 +20,5 @@ Upon opening the video, four things were identified:
 ![Punggol Park](https://github.com/BunchOfBytes/STF-2020/blob/main/OSINT/Punggol%20Park.png)
 
 Since there were limited tries for this flag, we made very sure that this was the place, comparing Google Map’s street view (the blue lines) with the video and after confirming, inputted the postal code of Punggol Park which was 538768 into the Flag, which was correct.
+
+###Flag: govtech-csg{538768}
