@@ -11,10 +11,6 @@ which we thought would be the date the picture was taken. However, the flag govt
 
 Scanning the barcode directly did not work as the picture was too blurry. Our solution to this was to use Photoshop to sharpen the image, which still did not allow us to scan the image. Thus, we manually recreated the barcode in Google Sheets, which when scanned, gave us “25 October 2020”
 
-Original Barcode
 
-Digitally sharpened Barcode
-
-Reconstructed Barcode
 
 Finally, we needed the time for when the picture was taken. We used Google Maps to determine the angle the picture was taken from - facing the west, and from there used the shadows cast from the sign to determine the approximate time the picture was taken - in the afternoon.
