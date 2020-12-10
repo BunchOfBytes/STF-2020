@@ -17,13 +17,19 @@ This challenge gives us 3 videos. Important information from the videos are firs
 
 5. Punggol
 
-Using Google Maps, we quickly identified that this was Khatib Station by comparing visual similarities
+Using Google Maps, we quickly identified that this was Khatib Station by comparing visual similarities - in particular, the back of a signboard and the colours of the HDB blocks in the back.
+
+![visual similarities](https://github.com/BunchOfBytes/STF-2020/blob/main/Screenshot%20(10).png)
 
 For Video 2, we don’t see much other than two yellow pillars and the caption “Not even near the mrt… such a drag…” meaning that this was his stop and he had just alighted. Following the direction of the MRT and Bus, we know that he is travelling away from Yishun MRT, so we set our location as Khatib MRT and destination as Punggol MRT. (The location where he boarded Bus 117 as well as the terminal Bus 117 was heading to). We used Street View from Google Maps and followed the Bus Route, eventually finding the yellow pillars and confirming the general location of the kidnapping - near the Bus stop Blk 871 (At the Red Circle)
 
-Video 3 shows the exact place where the kidnapping happened, which is a void deck area under a HDB block. It is shown in Video 2 that he walked in, meaning that the possible locations were within the area highlighted below. 
-From here, we just had to use street view further until we found the table and the community garden behind it.
+![OSINT-2-1](https://github.com/BunchOfBytes/STF-2020/blob/main/osint-31.png)
 
+Video 3 shows the exact place where the kidnapping happened, which is a void deck area under a HDB block. It is shown in Video 2 that he walked in, meaning that the possible locations were within the area highlighted below. 
+![OSINT-2-2](https://github.com/BunchOfBytes/STF-2020/blob/main/osint-32.png)
+
+From here, we just had to use street view further until we found the table and the community garden behind it.
+![OSINT-2-3](https://github.com/BunchOfBytes/STF-2020/blob/main/osint-33.png)
 This area was identified as Block 870. Searching online gave us a postal code of 760870, and indeed govtech-csg{760870} was the flag.
 
 ### Flag: govtech-csg{760870}
