@@ -2,6 +2,7 @@
 In a recent raid on a suspected COViD hideout, we found this video in a thumbdrive on-site. We are not sure what this video signifies but we suspect COViD's henchmen might be surveying a potential target site for a biological bomb. We believe that the attack may happen soon. We need your help to identify the water body in this video! This will be a starting point for us to do an area sweep of the vicinity!
 
 ## Summary
+Players were given another video of a HDB block located near a water body. Players had to identify the postal code of the water body from the given video.
 
 ## Process
 
@@ -21,4 +22,4 @@ Upon opening the video, four things were identified:
 
 Since there were limited tries for this flag, we made very sure that this was the place, comparing Google Map’s street view (the blue lines) with the video and after confirming, inputted the postal code of Punggol Park which was 538768 into the Flag, which was correct.
 
-###Flag: govtech-csg{538768}
+### Flag: govtech-csg{538768}
