@@ -78,3 +78,5 @@ excellent artist, here's your code, govtech-csg{CE236F40A35E48F51E921AD5D28CF320
  39bc4f5150511ee7c3a703bdd615ed70f79002473d7f61d2dccfc397f7292b5e
  `````````
  ### Flag: govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}
+ 
+In the end, my team did not solve this before the end of the competition, but I guessed if we backtracked a little bit we would have been able to solve it. I guess the important lesson here is to always re-evaluate our information when conducting and OSINT investigation and not to make any assumptions such as "this information can only be used for XYZ in an investigation."
