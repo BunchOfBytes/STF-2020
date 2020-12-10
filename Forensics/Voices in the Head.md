@@ -21,6 +21,7 @@ None of us recognized this weird code, but we identified that there were 8 diffe
 `````````
 thisisnottheflag
 `````````
+![for-1](
 
 We bought the hint which said “If you want to keep a secret you must also hide it from yourself”. This means that we missed something along the way but we were still unable to figure it out. After another hint was added which said “Xiao wants to help. Will you let him help you?, we deduced that the ‘Xiao’ the hint was referring to was the Xiao Steganographic Extractor. Using the Xiao Extractor, we extracted a .zip file from the .wav file. The .zip file was password protected. To obtain the password, we used the strings command via the terminal (on macOS) to return all the strings of printable characters within the zip file. Sure enough, we found a string formatted like a flag “govtech-csg{Th1sisn0ty3tthefl@g}” as well as the file within the zip file, named “This is it.docx”
 
