@@ -14,7 +14,7 @@ All that is included in the file was a wav file, named forensics-challenge-2.wav
 
 ![for-2](https://github.com/BunchOfBytes/STF-2020/blob/main/Forensics/foren2.png)
 
-We used an online decoder to obtain a pastebin link which gave us this string of random characters
+We used an online decoder (https://www.base64decode.org/) to obtain a pastebin link (https://pastebin.com/jETj2uUb) which gave us this string of random characters
 
 `````````
 ++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>>>++++++++++++++++.------------.+.++++++++++.----------.++++++++++.-----.+.+++++..------------.---.+.++++++.-----------.++++++.
@@ -34,5 +34,7 @@ Sure enough, we found a string formatted like a flag “govtech-csg{Th1sisn0ty3t
 
 ![for-3](https://github.com/BunchOfBytes/STF-2020/blob/main/Forensics/foren3.png)
 
-Initially, we thought that this was the final flag and proceeded to submit it, which was rejected. Soon after, we realised that the “flag” was actually the password to the .zip file. Upon extracting the .docx file from the .zip file, it was found to also be password protected. Instinctively, we entered the initial string we obtained, “thisisnottheflag” as the password as it resembled the password to the .zip file. The password was correct and we were able access the .docx file thereafter. The real flag was then obtained after opening the .docx file using Microsoft Word, which was “govtech-csg{3uph0n1ou5_@ud10_ch@ll3ng3}”.
+Initially, we thought that this was the final flag and proceeded to submit it, which was rejected. Soon after, we realised that the “flag” was actually the password to the .zip file. Upon extracting the .docx file from the .zip file, it was found to also be password protected. Instinctively, we entered the initial string we obtained, “thisisnottheflag” as the password as it resembled the password to the .zip file. The password was correct and we were able access the .docx file thereafter. From this challenge, we learnt the importance of trying out possible credentials everywhere we find a login/file that requires a password! The real flag was then obtained after opening the .docx file using Microsoft Word, which was “govtech-csg{3uph0n1ou5_@ud10_ch@ll3ng3}”.
+
+### Flag: govtech-csg{3uph0n1ou5_@ud10_ch@ll3ng3}
 
