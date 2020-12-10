@@ -17,6 +17,6 @@ Upon opening the video, four things were identified:
 
 2 and 4 tells us this area has relatively new HDB blocks, which brings up areas such as Sengkang, Punggol and Tampines. From this, we had to find an area with a water body and a bus stop near these areas. Using Map view on Google Maps, we quickly identified Punggol Park, as it was a water body in a newer area. (Other water body we tried was Bedok Reservoir, but we did not find any similarities) There were 5 bus stops around the Park, which meant we quickly found the bus stop with a white roof as well as the Condo Block - Parkland Residences. 
 
-! 
+![Punggol Park](https://github.com/BunchOfBytes/STF-2020/blob/main/OSINT/Punggol%20Park.png)
 
 Since there were limited tries for this flag, we made very sure that this was the place, comparing Google Map’s street view (the blue lines) with the video and after confirming, inputted the postal code of Punggol Park which was 538768 into the Flag, which was correct.
