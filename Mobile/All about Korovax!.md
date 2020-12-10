@@ -187,6 +187,7 @@ root@kali:/opt/genymobile/genymotion/tools# ./adb shell am start -W -a "android.
 ``````
 
 Clicking the button gives us a Base64 encoded flag as there is a trailing = sign at the end - Z292dGVjaC1jc2d7SV9oMFAzX3VfRDFEX04wVF9DbDFjS19VUl9XQHlfSDNyM30= 
+
 which can be decoded here - https://www.base64decode.org/, into the real flag.
 
 ### Flag: govtech-csg{I_h0P3_u_D1D_N0T_Cl1cK_UR_W@y_H3r3}
